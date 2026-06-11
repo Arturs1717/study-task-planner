@@ -18,9 +18,11 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+    'name',
+    'email',
+    'password',
+    'role',
+    'is_blocked',
     ];
 
     /**
@@ -41,8 +43,13 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
         ];
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
     }
 }
